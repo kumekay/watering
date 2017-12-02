@@ -1,0 +1,8 @@
+.pioenvs
+.piolibdeps
+.clang_complete
+.gcc-flags.json
+.piolibdeps
+.vscode
+src/credentials.h
+.vscode/c_cpp_properties.json
