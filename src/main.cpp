@@ -22,8 +22,8 @@ const char fw_ver[] = "0.0.1";
 
 uint8_t pumpPins[2]{D1, D2};
 uint8_t pumpDirectionPins[2]{D3, D4};
-uint8_t tankEmptyPin{D7};
-uint8_t tankLowPin{D8};
+uint8_t tankEmptyPin{D5};
+uint8_t tankLowPin{D6};
 WidgetLED tankEmpty{V2};
 WidgetLED tankLow{V1};
 
@@ -71,7 +71,7 @@ void checkPumpState()
                 if (wateringState[pumpId] == HIGH && wateringStartTime[pumpId] + wateringDuration[pumpId] < millis())
                 {
                         wateringState[pumpId] = LOW;
-                        DEBUG_SERIAL.println("Turn off pump ");
+                        DEBUG_SERIAL.println("Turn off pump " + String(pumpId));
                 }
                 digitalWrite(pumpPins[pumpId], wateringState[pumpId]);
         }
@@ -112,10 +112,11 @@ void setup()
         for (uint8 i = 0; i <= 1; i++)
         {
                 pinMode(pumpDirectionPins[i], OUTPUT);
-                digitalWrite(pumpDirectionPins[i], LOW);
+                digitalWrite(pumpDirectionPins[i], HIGH);
                 pinMode(pumpPins[i], OUTPUT);
                 digitalWrite(pumpPins[i], LOW);
         }
+
         pinMode(tankEmptyPin, INPUT_PULLUP);
         pinMode(tankLowPin, INPUT_PULLUP);
 
