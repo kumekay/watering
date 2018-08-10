@@ -6,3 +6,5 @@
 .vscode
 src/credentials.h
 .vscode/c_cpp_properties.json
+.vscode/.browse.c_cpp.db*
+.vscode/launch.json

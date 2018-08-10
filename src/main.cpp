@@ -29,7 +29,7 @@ WidgetLED tankLow{V1};
 
 bool timeToCheckWaterLevel{false};
 
-uint32_t wateringDuration[2]{500};
+uint32_t wateringDuration[2]{15000};
 uint32_t wateringStartTime[2]{0};
 uint8_t wateringState[2]{LOW};
 
@@ -134,16 +134,21 @@ void loop()
 
 // Blynk callbacks
 
+// Sync state on reconnect
+BLYNK_CONNECTED() {
+    Blynk.syncAll();
+}
+
 // Watering Duration
 BLYNK_WRITE(V9)
 {
-        wateringDuration[0] = param.asInt();
+        wateringDuration[0] = param.asInt()*1000;
         DEBUG_SERIAL.println("Update watering duration: " + String(wateringDuration[0]));
 }
 
 BLYNK_WRITE(V10)
 {
-        wateringDuration[1] = param.asInt();
+        wateringDuration[1] = param.asInt()*1000;
         DEBUG_SERIAL.println("Update watering duration: " + String(wateringDuration[1]));
 }
 
